@@ -1,0 +1,69 @@
+INSTALAR CLANG FORMAT
+
+sudo -s
+sudo apt-get update
+sudo apt-get install clang-format
+sudo apt update
+sudo apt upgrade clang-format
+clang-format --version
+
+(deberia salir Ubuntu clang-format version 18.0.0 (++20231113042232+44e8bea4009a-1~exp1~20231113042357.1304)) si no mirar como actualizar
+
+
+
+
+ACTUALIZAR CMAKE (Actualizalo para que funcione (tarda un rato))
+
+Desinstalar la versión actual de CMake:
+
+Abre la terminal.
+Ejecuta sudo apt-get remove cmake.
+
+Instalar la versión más reciente:
+
+Descargar la versión más reciente (cmake-3.28.0-rc5.tar.gz) desde el sitio web oficial de CMake (cmake.org/download).
+Extraer los archivos descargados.
+Navega a la carpeta extraída a través de la terminal.
+Ejecuta los siguientes comandos:
+
+sudo apt-get update
+sudo apt-get install libssl-dev
+./bootstrap
+make
+sudo make install
+
+Esto compilará e instalará la nueva versión.
+
+
+
+
+INSTALAR CLANG TIDY (Instalatelo antes de compilarlo)
+
+sudo apt-get install clang-tidy
+
+INSTALAR OPENMP
+sudo apt-get update
+sudo apt-get install codeblocks
+
+
+COMPILAR PROYECTO (Importante meter los 5 comandos, incluido el find . -iname *.hpp......)
+
+find . -iname *.hpp -o -iname *.cpp | xargs clang-format -i
+
+COMANDO COMBINADO PARA COMPILAR Y PROBAR ARCHIVOS
+
+find . -iname *.hpp -o -iname *.cpp | xargs clang-format -i && mkdir build && cd build && cmake .. && make && cd .. && ./build/fluid/fluid 1000 ./in/small.fld ./out/small_output.fld
+
+PROBAR ARCHIVOS
+
+./build/fluid/fluid 100 ./in/small.fld ./out/small_output.fld
+
+./build/fluid/fluid 1000 ./in/large.fld ./out/large_output.fld
+
+PROBAR TESTS UNITARIOS
+
+find . -iname *.hpp -o -iname *.cpp | xargs clang-format -i && mkdir build && cd build && cmake .. && make && cd .. && ./build/utest/utest
+
+PROBAR TESTS FUNCIONALES
+find . -iname *.hpp -o -iname *.cpp | xargs clang-format -i && mkdir build && cd build && cmake .. && make && cd .. && ./build/ftest/ftest
+
